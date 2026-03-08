@@ -8,10 +8,10 @@ export function Hero() {
     <section className="bg-gradient-to-b from-blue-50 to-white py-20">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-5xl font-bold text-gray-900 mb-6">
-          Master Coding Interviews
+          Ia examenele de la AC
         </h1>
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          Practice on thousands of coding problems, improve your skills, and land your dream job
+          Practica pentru examenul de la PC.
         </p>
         <button
           onClick={() => navigate("/signup")}
