@@ -1,0 +1,24 @@
+import { createBrowserRouter } from "react-router";
+import { Home } from "./pages/Home";
+import { ProblemDetail } from "./pages/ProblemDetail";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Home,
+  },
+  {
+    path: "/problem/:id",
+    Component: ProblemDetail,
+  },
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/signup",
+    Component: Signup,
+  },
+]);
