@@ -16,7 +16,7 @@ export function Signup() {
     e.preventDefault();
     console.log("Signing up...", formData);
     login();
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
@@ -27,8 +27,8 @@ export function Signup() {
             <Code2 className="w-10 h-10 text-blue-600" />
             <span className="text-2xl font-bold">SAC</span>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
-          <p className="text-gray-600">Start your coding journey today</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Join SAC</h1>
+          <p className="text-gray-600">Start preparing for your AC exams today</p>
         </div>
 
         <div className="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">

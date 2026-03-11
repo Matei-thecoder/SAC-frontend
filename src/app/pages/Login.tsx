@@ -15,7 +15,7 @@ export function Login() {
     e.preventDefault();
     console.log("Logging in...", formData);
     login();
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
@@ -27,7 +27,7 @@ export function Login() {
             <span className="text-2xl font-bold">SAC</span>
           </Link>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600">Log in to continue practicing</p>
+          <p className="text-gray-600">Continue your exam preparation</p>
         </div>
 
         <div className="bg-white rounded-lg border border-gray-200 p-8 shadow-sm">

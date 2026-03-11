@@ -106,7 +106,7 @@ export function ProblemDetail() {
       <div className="flex-1 flex flex-col">
         <div className="container mx-auto px-4 py-4">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/dashboard")}
             className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-4"
           >
             <ArrowLeft className="w-5 h-5" />
