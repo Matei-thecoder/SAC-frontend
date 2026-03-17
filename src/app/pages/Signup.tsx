@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 
 export function Signup() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -15,8 +15,8 @@ export function Signup() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signing up...", formData);
-    login();
-    navigate("/dashboard");
+    signup(formData.email, formData.username, formData.password);
+    navigate("/login");
   };
 
   return (

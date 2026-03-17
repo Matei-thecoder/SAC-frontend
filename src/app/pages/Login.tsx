@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 
 export function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login,getUser } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,7 +14,8 @@ export function Login() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Logging in...", formData);
-    login();
+    login(formData.email, formData.password);
+    
     navigate("/dashboard");
   };
 
