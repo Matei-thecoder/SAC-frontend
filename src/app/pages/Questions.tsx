@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "../components/Header";
 import { useAuth } from "../context/AuthContext";
 import { CheckCircle, XCircle } from "lucide-react";
@@ -7,12 +7,12 @@ interface Question {
   id: number;
   question: string;
   options: string[];
-  correctAnswer: number;
+  correct_answer: number;
   explanation?: string;
   category: string;
 }
 
-const questionsData: Question[] = [
+/*const questionsData: Question[] = [
   {
     id: 1,
     question: "Care este scopul principal al unui Makefile în programarea C?",
@@ -118,12 +118,17 @@ const questionsData: Question[] = [
     category: "Functions"
   },
 ];
-
+*/
 export function Questions() {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, getQuestions } = useAuth();
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState<Record<number, boolean>>({});
   const [filterCategory, setFilterCategory] = useState<string>("All");
+  const [questionsData, setQuestionsData] = useState<Question[]>([]);
+
+  useEffect(() => {
+    getQuestions().then(setQuestionsData);
+  }, [getQuestions]);
 
   const categories = ["All", ...Array.from(new Set(questionsData.map(q => q.category)))];
 
@@ -193,8 +198,8 @@ export function Questions() {
           {filteredQuestions.map((question) => {
             const selectedAnswer = selectedAnswers[question.id];
             const showResult = showResults[question.id];
-            const isCorrect = selectedAnswer === question.correctAnswer;
-
+            const isCorrect = selectedAnswer === question.correct_answer;  // 0-based
+            //console.log(`Question ID: ${question.id}, Selected Answer: ${selectedAnswer}, Correct Answer: ${question.correct_answer}, Is Correct: ${isCorrect}`);
             return (
               <div key={question.id} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <div className="flex items-start justify-between mb-4">
@@ -211,7 +216,7 @@ export function Questions() {
                 <div className="space-y-3 mb-4">
                   {question.options.map((option, index) => {
                     const isSelected = selectedAnswer === index;
-                    const isCorrectOption = index === question.correctAnswer;
+                    const isCorrectOption = index === question.correct_answer;  // Changed: removed - 1
                     
                     let optionClass = "border-2 border-gray-200 hover:border-blue-400";
                     if (showResult) {

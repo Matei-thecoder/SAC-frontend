@@ -6,6 +6,7 @@ interface AuthContextType {
   login: (email: string, password: string) => void;
   logout: () => void;
   getUser: () => void;
+  getQuestions: () => Promise<{ id: number; question: string; options: string[]; correct_answer: number; explanation?: string; category: string }[]>;
   token: string | null;
   username: string | null;
 }
@@ -86,8 +87,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .catch((error) => console.error("Get user error:", error));
   };
 
+  const getQuestions = async (): Promise<{ id: number; question: string; options: string[]; correct_answer: number; explanation?: string; category: string }[]> => {
+    try {
+      const response = await fetch("http://localhost:3000/protected/questions", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (data.message === "Questions retrieved successfully") {
+        console.log("Questions:", data.questions);
+        return data.questions;
+      }
+      return [];
+    } catch (error) {
+      console.error("Get questions error:", error);
+      return [];
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, signup, login, logout, token, username, getUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, signup, login, logout, token, username, getUser, getQuestions }}>
       {children}
     </AuthContext.Provider>
   );
